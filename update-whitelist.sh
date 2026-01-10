@@ -1,62 +1,114 @@
 #!/bin/bash
+set -euo pipefail
 
-# Folder tujuan
+# ===============================
+# KONFIGURASI
+# ===============================
 WHITELIST_DIR="/etc/unbound/unbound.conf.d/zzz-whitelist"
-WHITELIST_FILE="zzzzz-whitelist.conf"
-URL="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/devhunter-whitelist.conf"
+
+declare -A WHITELISTS=(
+  ["zzzzz-devhunter-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/devhunter-whitelist.conf"
+  ["zzzzz-hagezi-referral-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-referral-whitelist.conf"
+  ["zzzzz-shadowwhisperer-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/shadowwhisperer-whitelist.conf"
+)
 
 # ===============================
-# FUNCTION LOG DENGAN TIMESTAMP
+# PREP
 # ===============================
+CACHE_FILE="$(mktemp)"
+TMP_DIR="$(mktemp -d)"
+BACKUP_DIR="$(mktemp -d)"
+
 log() {
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
 }
 
+cleanup() {
+  rm -f "$CACHE_FILE"
+  rm -rf "$TMP_DIR" "$BACKUP_DIR"
+}
+trap cleanup EXIT
+
+command -v unbound-control >/dev/null || { log "[?] unbound-control tidak ditemukan"; exit 1; }
+command -v unbound-checkconf >/dev/null || { log "[?] unbound-checkconf tidak ditemukan"; exit 1; }
+
 # ===============================
-# Buat folder jika belum ada
+# BACKUP CACHE
 # ===============================
+log "[?] Backup DNS cache..."
+unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null || true
+
+# ===============================
+# DOWNLOAD WHITELIST (TEMP)
+# ===============================
+log "[?] Download whitelist..."
+
+for FILE in $(printf "%s\n" "${!WHITELISTS[@]}" | sort); do
+  URL="${WHITELISTS[$FILE]}"
+  DEST="$TMP_DIR/$FILE"
+
+  log "[+] $FILE"
+  curl -fsSL \
+    --connect-timeout 10 \
+    --max-time 30 \
+    "$URL" -o "$DEST"
+
+  [ -s "$DEST" ] || { log "[?] File kosong: $FILE"; exit 1; }
+done
+
+# ===============================
+# BACKUP WHITELIST LAMA
+# ===============================
+log "[?] Backup whitelist lama..."
 mkdir -p "$WHITELIST_DIR"
+cp -a "$WHITELIST_DIR/." "$BACKUP_DIR/" 2>/dev/null || true
 
 # ===============================
-# Download whitelist
+# DEPLOY BARU (ATOMIC)
 # ===============================
-TEMP_FILE="/tmp/$WHITELIST_FILE"
-log "[+] Downloading whitelist dari $URL ..."
-wget --quiet -O "$TEMP_FILE" "$URL"
-
-if [ ! -s "$TEMP_FILE" ]; then
-    log "[!] Download gagal atau file kosong!"
-    exit 1
-fi
+log "[?] Deploy whitelist baru..."
+rm -f "$WHITELIST_DIR"/*
+cp -a "$TMP_DIR/." "$WHITELIST_DIR/"
 
 # ===============================
-# Pindahkan ke folder whitelist dengan nama baru
+# VALIDASI KONFIG
 # ===============================
-mv "$TEMP_FILE" "$WHITELIST_DIR/$WHITELIST_FILE"
-log "[+] Whitelist tersimpan di $WHITELIST_DIR/$WHITELIST_FILE"
+log "[?] Validasi konfigurasi Unbound..."
+unbound-checkconf > /dev/null
 
 # ===============================
-# Cek syntax Unbound
+# RELOAD FAIL-SAFE
 # ===============================
-unbound-checkconf "$WHITELIST_DIR/$WHITELIST_FILE" > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-    log "[!] Error syntax di $WHITELIST_FILE"
-    exit 1
-fi
-
-# ===============================
-# Reload Unbound
-# ===============================
-log "[+] Reload Unbound ..."
-systemctl reload unbound
-if [ $? -eq 0 ]; then
-    log "[+] Unbound berhasil direload!"
+log "[?] Reload Unbound..."
+if systemctl reload unbound; then
+  log "[?] Reload sukses"
 else
-    log "[!] Reload gagal, coba restart..."
-    systemctl restart unbound
-    if [ $? -eq 0 ]; then
-        log "[+] Unbound berhasil direstart!"
-    else
-        log "[!] Restart juga gagal! Periksa konfigurasi."
-    fi
+  log "[!] Reload gagal ? rollback whitelist"
+
+  rm -f "$WHITELIST_DIR"/*
+  cp -a "$BACKUP_DIR/." "$WHITELIST_DIR/"
+
+  log "[?] Restart Unbound (last resort)..."
+  if systemctl restart unbound; then
+    log "[?] Restart sukses setelah rollback"
+  else
+    log "[?] Restart gagal — DNS DOWN"
+    exit 1
+  fi
 fi
+
+# ===============================
+# RESTORE CACHE
+# ===============================
+log "[?] Restore DNS cache..."
+unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+
+# ===============================
+# HEALTH CHECK
+# ===============================
+unbound-control status > /dev/null || {
+  log "[?] Unbound tidak healthy setelah update"
+  exit 1
+}
+
+log "[?] Semua whitelist ter-update dengan aman"
