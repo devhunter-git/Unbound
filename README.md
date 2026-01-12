@@ -30,3 +30,7 @@ Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adany
 * Whitelist: Devhunter, ShadowWhisperer & Hagezi
 
 ==========================================================================================
+
+"Berselancar di internet lebih aman, cepat, dan bebas iklan. Gunakan InternetSafe.id DNS sekarang juga."
+
+==========================================================================================
