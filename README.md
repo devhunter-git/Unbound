@@ -6,7 +6,9 @@ Pengguna dapat berkontribusi dan menerapkan Internet Sehat dengan DNS kami tanpa
 
 Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adanya laporan bug. Misalnya, tidak bisa mengakses sebuah website dengan tujuan untuk melacak sumber masalah dan mengatasi laporan bug tersebut.
 
-#Blocklist : Ads, Gambling, NSFW/Porn, Malicious, Ransomware, Phishing, Scamm, Spam, CryptoJacking, DoH/DoT & TIF
+#Blocklist : 
+
+Ads, Gambling, NSFW/Porn, Malicious, Ransomware, Phishing, Scamm, Spam, CryptoJacking, DoH/DoT & TIF
 
 =========================
 
