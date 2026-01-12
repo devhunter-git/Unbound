@@ -26,7 +26,7 @@ Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adany
 ==========================================================================================
 
 #Sync Database
-* Blocklist: OISD, Sefinek, 1Hosts, Devhunter, Hagezi, ShadowWhisperer, Romainmarcoux, AdGuard Team, Privacy Protection Tools, CyberHost, ThreatFox & StevenBlack
+* Blocklist: OISD, Sefinek, 1Hosts, Devhunter, Hagezi, ShadowWhisperer, Romainmarcoux, AdGuard Team, Privacy Protection Tools, CyberHost, ThreatFox, CertPL & StevenBlack
 * Whitelist: Devhunter, ShadowWhisperer & Hagezi
 
 ==========================================================================================
