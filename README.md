@@ -36,13 +36,11 @@ Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adany
 ==========================================================================================
 <div align="center">
 
-# BEBAS DNS
+# INTERNET SAFE ID DNS
 *Membantumu berselancar dengan aman dan tidak terbatas!*
 
-![](https://img.shields.io/badge/LISENSI-MIT-white?style=flat-square) 
-![](https://img.shields.io/badge/DILUNCURKAN-2020-white?style=flat-square)
+![](https://img.shields.io/badge/DILUNCURKAN-2025-white?style=flat-square)
 
-[![](https://img.shields.io/badge/DISCORD-302%20ONLINE-black?style=flat-square&logo=discord)](link)
 [![](https://img.shields.io/badge/TELEGRAM-JOIN-black?style=flat-square&logo=telegram)](link)
 [![](https://img.shields.io/badge/WHATSAPP-JOIN-black?style=flat-square&logo=whatsapp)](link)
 
@@ -59,6 +57,6 @@ Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adany
 ### Sponsor
 *Penyedia VPS yang berorientasi pada kebebasan dan netral untuk kebutuhannya.*
 
-[![](https://path-ke-logo-atharva.png)](https://atharva.co.id)
+[![]([https://path-ke-logo-atharva.png](https://ctn.co.id/wp-content/uploads/2023/01/logo-ctn.png))](https://ctn.co.id)
 
 </div>
