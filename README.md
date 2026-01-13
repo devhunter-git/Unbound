@@ -1,10 +1,6 @@
 
 <div align="center">
 
-Bahasa / Language
-<br>
-<img src="https://img.shields.io/badge/-%F0%9F%87%AE%F0%9F%87%B3%20Indonesia-black?style=flat-square" alt="Indonesia"> <img src="https://img.shields.io/badge/-%F0%9F%87%BA%F0%9F%87%B8%20English-blue?style=flat-square" alt="English">
-
 # DNS INTERNET SAFE INDONESIA
 
 "Berselancar di internet lebih aman, cepat, dan bebas iklan. Gunakan InternetSafe.id DNS sekarang juga!"
