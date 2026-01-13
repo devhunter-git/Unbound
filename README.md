@@ -34,3 +34,31 @@ Sewaktu-waktu hanya akan mengaktifkan menyimpan kueri dan log apabila jika adany
 "Berselancar di internet lebih aman, cepat, dan bebas iklan. Gunakan InternetSafe.id DNS sekarang juga."
 
 ==========================================================================================
+<div align="center">
+
+# BEBAS DNS
+*Membantumu berselancar dengan aman dan tidak terbatas!*
+
+![](https://img.shields.io/badge/LISENSI-MIT-white?style=flat-square) 
+![](https://img.shields.io/badge/DILUNCURKAN-2020-white?style=flat-square)
+
+[![](https://img.shields.io/badge/DISCORD-302%20ONLINE-black?style=flat-square&logo=discord)](link)
+[![](https://img.shields.io/badge/TELEGRAM-JOIN-black?style=flat-square&logo=telegram)](link)
+[![](https://img.shields.io/badge/WHATSAPP-JOIN-black?style=flat-square&logo=whatsapp)](link)
+
+---
+
+### Pemberitahuan tentang DPI
+<details>
+  <summary>Pencet untuk buka pemberitahuan</summary>
+  Isi pesan rahasia atau detail pemberitahuan di sini.
+</details>
+
+---
+
+### Sponsor
+*Penyedia VPS yang berorientasi pada kebebasan dan netral untuk kebutuhannya.*
+
+[![](https://path-ke-logo-atharva.png)](https://atharva.co.id)
+
+</div>
