@@ -36,6 +36,8 @@ Bahasa / Language
     * [Peladen Utama](#peladen-utama)
         * [DNS Bawaan (Default)](#dns-bawaan-default)
     * [Penyaring (Ad-Blocker & Anti-Tracking)](#penyaring-ad-blocker--anti-tracking)
+        * [Daftar Blokir DNS](#daftar-blokir-dns)
+        * [Kontribusi List Blocklist](#kontribusi-list-blocklist)
     * [Pemeliharaan](#pemeliharaan)
     * [Isi Tutorial dan Bertanya](#isi-tutorial-dan-bertanya)
     * [Donasi Kami](#donasi-kami)
@@ -64,5 +66,34 @@ Memblokir perangkat lunak jahat (malware), link pelacakan (tracking), dan iklan 
 | :--- | :--- | :--- |
 | IPv4 | 103.157.116.69 | 53 |
 | IPv6 | 2001:df4:b100:3:1:1:f49a:3064 | 53 |
+
+---
+### Daftar Blokir DNS
+
+Digunakan untuk memblokir domain menurut varian DNS yang tersedia.
+
+| Blocklists - Untuk DNS Default |
+| :--- |
+| [OISD](#) |
+| [1Hosts](#) |
+| [DevHunter ID Custom Filtering Blocklists Rules](#) |
+| [HaGeZi](#) |
+| [ShadowWhisperer](#) |
+| [Romainmarcoux](#) |
+| [AdGuard Team](#) |
+| [Privacy Protection Tools](#) |
+| [CyberHost](#) |
+| [ThreatFox](#) |
+| [Kominfo/Komdigi](#) |
+| [Cert PL Anti Malware](#) |
+| [Pi-Hole Team](#) |
+| [StevenBlack](#) |
+| [Sefinek](#) |
+
+---
+
+### Kontribusi List Blocklist
+
+Untuk berkontribusi ke blocklist komunitas dilingkup phishing, malware, tracker, dan iklan annoyance, pornografi, judi, SARA, dan konten yang melanggar norma kesusilaan anda dapat fork **Blocklist Kami** dan kirimkan kontribusi anda, atau bergabunglah dengan komunitas kami di **Telegram** kami.
 
 ---
