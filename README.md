@@ -32,10 +32,10 @@ Bahasa / Language
 
 ## Daftar Isi:
 
-* [BebasDNS / BebasID DNS](#bebasdns--bebasid-dns)
+* [Internet Safe DNS ID](#bebasdns--bebasid-dns)
     * [Peladen Utama](#peladen-utama)
         * [DNS Bawaan (Default)](#dns-bawaan-default)
-    * [Penyaring (Ad-Blocker & Anti-Tracking)](#penyaring-ad-blocker--anti-tracking)
+    * [Penyaring (Ad-Blocker, Anti-Tracking, Anti NSFW, Anti Gambling & Anti Malware)](#penyaring-ad-blocker--anti-tracking)
         * [Daftar Blokir DNS](#daftar-blokir-dns)
         * [Kontribusi List Blocklist](#kontribusi-list-blocklist)
     * [Pemeliharaan](#pemeliharaan)
