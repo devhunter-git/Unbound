@@ -1,6 +1,6 @@
 # Indonesia IPv4 CIDR List
 # Source: herrbischoff/country-ip-blocks
-# Updated: 04/02/2026  0:00:08,08
+# Updated: 04/02/2026  1:00:05,84
 # Total CIDR: 4475
 9.154.0.0/16
 14.102.46.0/23
