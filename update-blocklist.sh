@@ -106,6 +106,9 @@ LISTS["malware/01-DevHunter-stalkerware.conf"]="https://raw.githubusercontent.co
 # trustpositif-gambling-id
 #LISTS["malware/01-DevHunter-trustpositif-gambling-id.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/trustpositif-gambling-id.conf"
 
+# trustpositif-gambling-au
+LISTS["malware/01-DevHunter-trustpositif-gambling-au.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/trustpositif-gambling-au.conf"
+
 # URLHaus / Sefinek
 LISTS["malware/01-DevHunter-urlhaus-abuse.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/abuse/urlhaus.abuse.ch/hostfile.fork.conf"
 LISTS["malware/01-DevHunter-urlhaus-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/malware-filter/urlhaus-filter-hosts-online.fork.conf"
@@ -114,14 +117,33 @@ LISTS["malware/01-DevHunter-urlhaus-malware.conf"]="https://blocklist.sefinek.ne
 LISTS["malware/01-DevHunter-jarelllama-parked-domains.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/useless-websites/jarelllama/parked-domains.fork.conf"
 LISTS["malware/01-DevHunter-Sefinek-useless-websites.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/useless-websites/sefinek.hosts.conf"
 
-# Ransomware / Sefinek
+# Ransomware / Sefinek / blocklistproject
 LISTS["malware/01-DevHunter-ransomware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/ransomware/blocklistproject/ransomware.fork.conf"
+LISTS["malware/01-DevHunter-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/blocklistproject/malware.fork.conf"
 
-# redirect / Sefinek
+# redirect / Sefinek / blocklistproject
 LISTS["malware/01-DevHunter-redirect.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/redirect/blocklistproject/redirect.fork.conf"
 
 # Ph00lt0
 LISTS["malware/01-DevHunter-ph00lt0.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/ph00lt0-blocklist.conf"
+
+# Stevenblack / Sefinek / gambling
+LISTS["malware/01-DevHunter-StevenBlack.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/gambling/StevenBlack/hosts.fork.conf"
+
+# MajkiIT / Sefinek / gambling
+LISTS["malware/01-DevHunter-MajkiIT.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/gambling/MajkiIT/gambling-hosts.fork.conf"
+
+# blocklistproject / Sefinek / gambling
+LISTS["malware/01-DevHunter-blocklistproject-gambling.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/gambling/blocklistproject/hosts.fork.conf"
+
+# Spam404 / Sefinek
+LISTS["malware/01-DevHunter-Spam404-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/Spam404/main-blacklist.fork.conf"
+
+# RPiList / Sefinek
+LISTS["malware/01-DevHunter-RPiList-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/RPiList/Malware.fork.conf"
+LISTS["malware/01-DevHunter-RPiList-Phishing.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/phishing/RPiList/Phishing-Angriffe.fork.conf"
+LISTS["malware/01-DevHunter-Army-Phishing.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/phishing/phishing.army/blocklist-extended.fork.conf"
+LISTS["malware/01-DevHunter-RPiList-spam-mails.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/spam/RPiList/spam-mails.fork.conf"
 
 # ===============================
 # WHITELIST
