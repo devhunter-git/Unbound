@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-BASE_DIR="/etc/unbound/unbound.conf.d/malware"
+BASE_DIR="/etc/unbound/unbound.conf.d"
 CACHE_FILE="/tmp/unbound_cache.txt"
 ERROR=0
 
@@ -27,64 +27,108 @@ log "[?] Backup DNS cache..."
 unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null || true
 
 # ===============================
-# KATEGORI
+# FOLDER KATEGORI
 # ===============================
-CATEGORIES=("devhunter")
-
-for cat in "${CATEGORIES[@]}"; do
-    mkdir -p "$BASE_DIR/$cat"
-    rm -f "$BASE_DIR/$cat"/*.conf
-done
+mkdir -p "$BASE_DIR/malware"
+mkdir -p "$BASE_DIR/zzz-whitelist"
+rm -f "$BASE_DIR/malware"/*.conf
+rm -f "$BASE_DIR/zzz-whitelist"/*.conf
 
 # ===============================
-# BLOCKLIST (ASLI)
+# BLOCKLISTS DEVHUNTER
 # ===============================
 declare -A LISTS
 
-LISTS["devhunter/Sefinek-ads-sefinek-hosts.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/ads/sefinek.hosts.conf"
-LISTS["devhunter/OISD-big-oisd.conf"]="https://big.oisd.nl/unbound"
-LISTS["devhunter/OISD-big-nsfw-oisd.conf"]="https://nsfw.oisd.nl/unbound"
+# Lokal / DevHunter
+LISTS["malware/01-DevHunter-BlockListDev-Lokal.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/devhunter-BlockListDev.conf"
 
-LISTS["devhunter/DevHunter-Sefinek-urlhaus.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/malware-filter/urlhaus-filter-hosts-online.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-spam404.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/Spam404/main-blacklist.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-stalkerware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/AssoEchap/stalkerware-indicators.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-hostsVN.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/bigdargon/hostsVN.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-dandelion.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/DandelionSprout-AntiMalwareHosts.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-reported-norton.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/reported-by-norton.conf"
-LISTS["devhunter/DevHunter-Sefinek-mw-sefinek1.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/sefinek.hosts1.conf"
-LISTS["devhunter/DevHunter-Sefinek-mw-sefinek2.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/sefinek.hosts2.conf"
-LISTS["devhunter/DevHunter-Sefinek-phishing.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/phishing.conf"
+# OISD
+LISTS["malware/01-DevHunter-oisd-big.conf"]="https://big.oisd.nl/unbound"
+LISTS["malware/01-DevHunter-oisd-nsfw.conf"]="https://nsfw.oisd.nl/unbound"
 
-LISTS["devhunter/DevHunter-Sefinek-toxic-domains.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/spam/stopforumspam/toxic-domains-whole.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-add-spam.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/spam/FadeMind/add-Spam.fork.conf"
+# Anti-ADs
+LISTS["malware/01-DevHunter-anti-ad.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/anti-ad.conf"
 
-LISTS["devhunter/DevHunter-Sefinek-discord-phishing.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/phishing/Dogino/Discord-Phishing-URLs-phishing.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-phishing-army.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/phishing/phishing.army/blocklist-extended.fork.conf"
+# Hagezi
+LISTS["malware/01-DevHunter-hagezi-tif.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-tif.conf"
+LISTS["malware/01-DevHunter-hagezi-dga7.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-dga7.conf"
+LISTS["malware/01-DevHunter-hagezi-pro.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-pro.conf"
+LISTS["malware/01-DevHunter-hagezi-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-gambling.conf"
+LISTS["malware/01-DevHunter-hagezi-spam-tlds.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-spam-tlds.conf"
+LISTS["malware/01-DevHunter-hagezi-nosafesearch.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-nosafesearch.conf"
 
-LISTS["devhunter/DevHunter-Sefinek-easyprivacy.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/tracking-and-telemetry/0Zinc/easyprivacy.fork.conf"
-LISTS["devhunter/DevHunter-Sefinek-adguard-mobile-host.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/tracking-and-telemetry/MajkiIT/adguard-mobile-host.fork.conf"
+# romainmarcoux
+LISTS["malware/01-DevHunter-romainmarcoux-full-aa-ab-ac.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/romainmarcoux-full-aa-ab-ac.conf"
 
-LISTS["devhunter/DevHunter-hagezi-tif.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-tif.conf"
-LISTS["devhunter/DevHunter-hagezi-spam-tlds.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-spam-tlds.conf"
-LISTS["devhunter/DevHunter-hagezi-nosafesearch.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-nosafesearch.conf"
-LISTS["devhunter/DevHunter-hagezi-popupads.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-popupads.conf"
-LISTS["devhunter/DevHunter-hagezi-pro.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-pro.conf"
-LISTS["devhunter/DevHunter-hagezi-nsfw.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-nsfw.conf"
-LISTS["devhunter/DevHunter-hagezi-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-gambling.conf"
-LISTS["devhunter/DevHunter-hagezi-dyndns.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-dyndns.conf"
-LISTS["devhunter/DevHunter-hagezi-doh.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-doh.conf"
+# 1hosts
+LISTS["malware/01-DevHunter-1hosts-lite.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/1hosts-lite.conf"
 
-LISTS["devhunter/DevHunter-devhunter-BlockListDev.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/devhunter-BlockListDev.conf"
+# shadowwhisperer
+LISTS["malware/01-DevHunter-shadowwhisperer-scam.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-scam.conf"
+LISTS["malware/01-DevHunter-shadowwhisperer-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-malware.conf"
+LISTS["malware/01-DevHunter-shadowwhisperer-typo.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-typo.conf"
+LISTS["malware/01-DevHunter-shadowwhisperer-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-gambling.conf"
 
-LISTS["devhunter/DevHunter-shadowwhisperer-scam.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-scam.conf"
-LISTS["devhunter/DevHunter-shadowwhisperer-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-malware.conf"
-LISTS["devhunter/DevHunter-shadowwhisperer-ads.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-ads.conf"
-LISTS["devhunter/DevHunter-shadowwhisperer-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-gambling.conf"
-LISTS["devhunter/DevHunter-shadowwhisperer-adult.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-adult.conf"
+# Malware World
+LISTS["malware/01-DevHunter-malwareworld-dga.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-dga.conf"
+LISTS["malware/01-DevHunter-malwareworld-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-malware.conf"
+LISTS["malware/01-DevHunter-malwareworld-spammer.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-spammer.conf"
+LISTS["malware/01-DevHunter-malwareworld-phishing.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-phishing.conf"
 
-LISTS["devhunter/DevHunter-romainmarcoux-full-aa-ab-ac.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/romainmarcoux-full-aa-ab-ac.conf"
-LISTS["devhunter/DevHunter-1hosts-lite.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/1hosts-lite.conf"
-LISTS["devhunter/DevHunter-anti-ad.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/anti-ad.conf"
+# CertPL
+LISTS["malware/01-DevHunter-certpl.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/certpl.conf"
+
+# CyberHost
+LISTS["malware/01-DevHunter-cyberhost.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/cyberhost.conf"
+
+# ThreatFox
+LISTS["malware/01-DevHunter-threatfox.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/threatfox.conf"
+
+# phishdestroy
+LISTS["malware/01-DevHunter-phishdestroy.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/phishdestroy.conf"
+
+# pi-hole
+LISTS["malware/01-DevHunter-pi-hole-c2.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/pi-hole-c2.conf"
+LISTS["malware/01-DevHunter-pi-hole-banking-trojan.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/pi-hole-banking-trojan.conf"
+LISTS["malware/01-DevHunter-pi-hole-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/pi-hole-malware.conf"
+LISTS["malware/01-DevHunter-pi-hole-phishing.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/pi-hole-phishing.conf"
+
+# NRD
+LISTS["malware/01-DevHunter-NRD-7D-Host.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/nrd-7d.conf"
+
+# Accomplist
+LISTS["malware/01-DevHunter-Accomplist-Gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/Accomplist%20Gambling%20Unbound.conf"
+
+# stalkerware
+LISTS["malware/01-DevHunter-stalkerware-quad9.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware-quad9.conf"
+LISTS["malware/01-DevHunter-stalkerware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware.conf"
+
+# trustpositif-gambling-id
+#LISTS["malware/01-DevHunter-trustpositif-gambling-id.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/trustpositif-gambling-id.conf"
+
+# URLHaus / Sefinek
+LISTS["malware/01-DevHunter-urlhaus-abuse.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/abuse/urlhaus.abuse.ch/hostfile.fork.conf"
+LISTS["malware/01-DevHunter-urlhaus-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/malware-filter/urlhaus-filter-hosts-online.fork.conf"
+
+# Useless Website / Sefinek
+LISTS["malware/01-DevHunter-jarelllama-parked-domains.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/useless-websites/jarelllama/parked-domains.fork.conf"
+LISTS["malware/01-DevHunter-Sefinek-useless-websites.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/useless-websites/sefinek.hosts.conf"
+
+# Ransomware / Sefinek
+LISTS["malware/01-DevHunter-ransomware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/ransomware/blocklistproject/ransomware.fork.conf"
+
+# redirect / Sefinek
+LISTS["malware/01-DevHunter-redirect.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/redirect/blocklistproject/redirect.fork.conf"
+
+# Ph00lt0
+LISTS["malware/01-DevHunter-ph00lt0.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/ph00lt0-blocklist.conf"
+
+# ===============================
+# WHITELIST
+# ===============================
+LISTS["zzz-whitelist/zzzz-devhunter-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/devhunter-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-hagezi-referral-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-referral-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-shadowwhisperer-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/shadowwhisperer-whitelist.conf"
 
 # ===============================
 # DOWNLOAD & VALIDASI
@@ -105,23 +149,27 @@ for path in "${!LISTS[@]}"; do
 
     mv "$tmp" "$dest"
 
-    unbound-checkconf "$dest" >/dev/null 2>&1 || {
+    # cek sintaks
+    if ! unbound-checkconf "$dest" >/dev/null 2>&1; then
         log "[!] Syntax error: $dest"
         ERROR=1
-    }
+    fi
 done
 
 # ===============================
-# RELOAD ? RESTART FALLBACK
+# RELOAD UNBOUND HANYA JIKA TIDAK ADA ERROR
 # ===============================
-log "[?] Reload Unbound..."
-if systemctl reload unbound; then
-    log "[?] Reload berhasil"
-    unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+if [ "$ERROR" -eq 0 ]; then
+    log "[?] Reload Unbound..."
+    if systemctl reload unbound; then
+        log "[?] Reload berhasil"
+        unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+    else
+        log "[!] Reload gagal, restart Unbound..."
+        systemctl restart unbound
+        log "[?] Restart berhasil"
+        unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+    fi
 else
-    log "[!] Reload gagal (kemungkinan duplicate domain)"
-    log "[?] Restart Unbound..."
-    systemctl restart unbound
-    log "[?] Restart berhasil"
-    unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+    log "[!] Ditemukan error pada config, UNBOUND TIDAK DIRELOAD/RESTART!"
 fi
