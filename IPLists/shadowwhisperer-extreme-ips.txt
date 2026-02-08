@@ -1,11 +1,11 @@
 # ShadowWhisperer Extreme BruteForce IP Blocklist
 # Source: https://raw.githubusercontent.com/ShadowWhisperer/IPs/refs/heads/master/BruteForce/Extreme
-# Updated: 09/02/2026  0:39:07,62
+# Updated: 09/02/2026  2:14:10,69
 #
 #        File: BruteForce/Extreme
 # Description: Connected to my honeypots (80+ times)
-#    IP Count: 1,159
-#     Updated: 2/8/2026  17:14 (5:14 PM CST)
+#    IP Count: 1,160
+#     Updated: 2/8/2026  18:14 (6:14 PM CST)
 #         URL: https://raw.githubusercontent.com/ShadowWhisperer/IPs/master/BruteForce/Extreme
 #
 2.57.121.15
@@ -361,6 +361,7 @@
 134.209.87.233
 134.209.88.203
 134.209.88.215
+134.209.90.98
 134.209.90.110
 134.209.91.227
 134.209.93.61
@@ -1167,4 +1168,4 @@
 213.209.143.48
 213.209.159.159
 217.217.249.108
-# Total IPs: 1166
+# Total IPs: 1167
