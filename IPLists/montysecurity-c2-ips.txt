@@ -1,6 +1,6 @@
 # MontySecurity C2 Tracker IP Blocklist
 # Source: https://raw.githubusercontent.com/montysecurity/C2-Tracker
-# Updated: 10/02/2026  0:50:03,74
+# Updated: 10/02/2026 17:26:36,25
 216.118.101.101
 18.214.179.214
 131.186.57.140
