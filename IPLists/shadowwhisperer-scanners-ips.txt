@@ -1,11 +1,11 @@
 # ShadowWhisperer Scanner IP Blocklist
 # Source: https://raw.githubusercontent.com/ShadowWhisperer/IPs/refs/heads/master/Other/Scanners
-# Updated: 17/02/2026  8:34:15,79
+# Updated: 17/02/2026 10:08:38,74
 #
 #        File: Other/Scanner
 # Description: Scans your network for open ports / vulnerabilities
 #    IP Count: 10780
-#     Updated: 2/17/2026  00:42 (12:42 AM CST)
+#     Updated: 2/17/2026  02:43 (2:43 AM CST)
 #         URL: https://raw.githubusercontent.com/ShadowWhisperer/IPs/master/Other/Scanners
 #
 # AlphaStrike Labs        (4/08/2025)  https://www.alphastrike.io/en/log4j/
