@@ -1,11 +1,11 @@
 # ShadowWhisperer Medium BruteForce IP Blocklist
 # Source: https://raw.githubusercontent.com/ShadowWhisperer/IPs/refs/heads/master/BruteForce/Medium
-# Updated: 18/02/2026  9:12:15,60
+# Updated: 18/02/2026 10:34:16,45
 #
 #        File: BruteForce/Medium
 # Description: Connected to my honeypots (More than 5, but less than 20)
 #    IP Count: 3,669
-#     Updated: 2/18/2026  01:54 (1:54 AM CST)
+#     Updated: 2/18/2026  02:55 (2:55 AM CST)
 #         URL: https://raw.githubusercontent.com/ShadowWhisperer/IPs/master/BruteForce/Medium
 #
 1.15.148.9
@@ -205,7 +205,6 @@
 23.91.97.218
 23.94.123.143
 23.94.166.112
-23.95.236.27
 23.137.253.65
 23.157.88.55
 23.241.187.66
@@ -651,6 +650,7 @@
 47.86.44.48
 47.86.99.177
 47.86.235.58
+47.90.209.221
 47.91.18.4
 47.92.54.224
 47.93.38.195
