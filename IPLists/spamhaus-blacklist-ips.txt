@@ -1,6 +1,6 @@
 # Spamhaus Blacklist IPs
 # Source: https://raw.githubusercontent.com/cbuijs/accomplist/refs/heads/main/spamhaus/plain.black.ipcidr.list
-# Updated: 28/02/2026  5:32:36,95
+# Updated: 28/02/2026  6:58:27,67
 1.10.16.0/20
 1.19.0.0/16
 1.32.128.0/18
