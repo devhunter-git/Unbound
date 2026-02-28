@@ -1,6 +1,6 @@
 # Hagezi DoH IP Blocklist
 # Source: https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/ips/doh.txt
-# Updated: 28/02/2026 14:58:10,47
+# Updated: 28/02/2026 15:20:21,95
 1.0.0.1
 1.0.0.2
 1.0.0.3
