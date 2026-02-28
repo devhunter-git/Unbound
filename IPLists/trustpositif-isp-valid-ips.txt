@@ -1,6 +1,6 @@
 # TrustPositif ISP Valid IP Blocklist
 # Source: http://db.netadmin.my.id/trustpositif/ipaddress_isp_valid.txt
-# Updated: 28/02/2026 10:58:38,55
+# Updated: 28/02/2026 11:21:08,55
 128.199.71.59
 142.93.216.157
 143.198.210.53
