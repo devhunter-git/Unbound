@@ -1,7 +1,7 @@
 # Spamhaus DROP List IPv4+IPv6
 # Source IPv4: https://www.spamhaus.org/drop/drop.txt
 # Source IPv6: https://www.spamhaus.org/drop/dropv6.txt
-# Updated: 03/03/2026 23:07:24,15
+# Updated: 03/03/2026 23:09:37,75
 
 1.10.16.0/20 
 1.19.0.0/16 
@@ -1638,4 +1638,4 @@
 
 # Total entries IPv4: 1533
 # Total entries IPv6: 99
-# Total combined: 1533 + 99 = 1533 + 99 
+# Total combined: 1632
