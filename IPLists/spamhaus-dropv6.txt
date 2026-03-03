@@ -1,6 +1,6 @@
 # Spamhaus DROPv6 IP Blocklist
 # Source: https://www.spamhaus.org/drop/dropv6.txt
-# Updated: 03/03/2026 23:22:16,16
+# Updated: 03/03/2026 23:39:08,99
 2001:678:6c0::/48 ; SBL624855
 2001:678:6c4::/48 ; SBL626637
 2001:678:724::/48 ; SBL631364
