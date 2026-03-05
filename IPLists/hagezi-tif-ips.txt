@@ -1,6 +1,6 @@
 # Hagezi TIF IP Blocklist
 # Source: https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/ips/tif.txt
-# Updated: 05/03/2026 18:22:39,19
+# Updated: 06/03/2026  1:30:29,59
 1.0.218.230
 1.1.179.83
 1.10.16.20
