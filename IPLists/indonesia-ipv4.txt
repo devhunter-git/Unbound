@@ -1,5 +1,5 @@
 # Indonesia IPv4 CIDR List
 # Source: herrbischoff/country-ip-blocks
-# Updated: 05/03/2026 18:21:36,17
+# Updated: 05/03/2026 18:21:58,95
 # Total CIDR: 1
 404: Not Found
