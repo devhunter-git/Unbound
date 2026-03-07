@@ -1,6 +1,6 @@
 # Bitwire Outbound IP Blocklist
 # Source: https://raw.githubusercontent.com/bitwire-it/ipblocklist/refs/heads/main/outbound.txt
-# Updated: 08/03/2026  5:38:41,65
+# Updated: 08/03/2026  6:53:45,28
 0.0.0.2
 1.0.0.104
 1.0.2.0
