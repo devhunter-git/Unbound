@@ -51,7 +51,7 @@ LISTS["00-safesearch/00-DevHunter-SAFESEARCH.conf"]="https://raw.githubuserconte
 
 # OISD
 LISTS["malware/01-DevHunter-OISD-Big.conf"]="https://big.oisd.nl/unbound"
-LISTS["malware/01-DevHunter-OISD-nsfw.conf"]="https://nsfw-small.oisd.nl/unbound"
+LISTS["malware/01-DevHunter-OISD-nsfw.conf"]="https://nsfw.oisd.nl/unbound"
 
 # 1Hosts
 LISTS["malware/01-DevHunter-1Hosts-Lite.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/1hosts-lite.conf"
@@ -101,7 +101,8 @@ LISTS["malware/01-DevHunter-stalkerware.conf"]="https://raw.githubusercontent.co
 LISTS["malware/01-DevHunter-stalkerware-quad9.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware-quad9.conf"
 
 # NRD
-LISTS["malware/01-DevHunter-nrd-7d.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/nrd-7d.conf"
+LISTS["malware/01-DevHunter-nrd-1d.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/nrd-1d.conf"
+LISTS["malware/01-DevHunter-nrd-3d.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/nrd-3d.conf"
 
 # RPiList
 LISTS["malware/01-DevHunter-RPiList-Malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/RPiList/Malware.fork.conf"
