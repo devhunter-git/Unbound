@@ -2,8 +2,10 @@
 set -euo pipefail
 
 BASE_DIR="/etc/unbound/unbound.conf.d"
-CACHE_FILE="/tmp/unbound_cache.txt"
+CACHE_FILE="/var/lib/unbound/cache.dump"
+
 ERROR=0
+CHANGED=0
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
@@ -12,7 +14,7 @@ log() {
 # ===============================
 # PREREQUISITE CHECK
 # ===============================
-for cmd in wget curl unbound-control unbound-checkconf systemctl; do
+for cmd in wget curl unbound-control unbound-checkconf systemctl cmp; do
     command -v "$cmd" >/dev/null 2>&1 || {
         log "[!] Command tidak ditemukan: $cmd"
         exit 1
@@ -22,7 +24,6 @@ done
 # ===============================
 # BACKUP CACHE
 # ===============================
-trap 'rm -f "$CACHE_FILE"' EXIT
 log "[?] Backup DNS cache..."
 unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null || true
 
@@ -33,13 +34,9 @@ mkdir -p "$BASE_DIR/malware"
 mkdir -p "$BASE_DIR/00-safesearch"
 mkdir -p "$BASE_DIR/zzz-whitelist"
 mkdir -p "$BASE_DIR/zzz-block-lokal"
-rm -f "$BASE_DIR/malware"/*.conf
-rm -f "$BASE_DIR/00-safesearch"/*.conf
-rm -f "$BASE_DIR/zzz-whitelist"/*.conf
-rm -f "$BASE_DIR/zzz-block-lokal"/*.conf
 
 # ===============================
-# BLOCKLISTS DEVHUNTER
+# BLOCKLISTS
 # ===============================
 declare -A LISTS
 
@@ -141,37 +138,47 @@ LISTS["zzz-whitelist/zzzz-devhunter-hagezi-whitelist.conf"]="https://raw.githubu
 # DOWNLOAD & VALIDASI
 # ===============================
 for path in "${!LISTS[@]}"; do
+
     url="${LISTS[$path]}"
     tmp="/tmp/$(basename "$path")"
     dest="$BASE_DIR/$path"
 
     log "[+] Download $path"
-    wget -qO "$tmp" "$url" || curl -fsSL "$url" -o "$tmp" || {
+
+    wget -T 30 -t 2 -qO "$tmp" "$url" || curl -fsSL "$url" -o "$tmp" || {
         log "[!] Gagal download: $path"
         ERROR=1
         continue
     }
 
-    [ -s "$tmp" ] || { log "[!] File kosong: $path"; ERROR=1; continue; }
+    [ -s "$tmp" ] || {
+        log "[!] File kosong: $path"
+        ERROR=1
+        continue
+    }
 
+    if [ -f "$dest" ] && cmp -s "$tmp" "$dest"; then
+        log "[-] Tidak ada perubahan: $path"
+        rm "$tmp"
+        continue
+    fi
+
+    log "[✓] File berubah: $path"
     mv "$tmp" "$dest"
+    CHANGED=1
 
-    # cek sintaks
     if ! unbound-checkconf "$dest" >/dev/null 2>&1; then
         log "[!] Syntax error: $dest"
         ERROR=1
     fi
+
 done
 
 # ===============================
-# RELOAD UNBOUND HANYA JIKA TIDAK ADA ERROR
+# RELOAD UNBOUND
 # ===============================
 
-CACHE_FILE="/var/lib/unbound/cache.dump"
-
-if [ "$ERROR" -eq 0 ]; then
-    log "[?] Dump cache sebelum reload..."
-    unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null || true
+if [ "$ERROR" -eq 0 ] && [ "$CHANGED" -eq 1 ]; then
 
     log "[?] Reload Unbound (keep cache)..."
 
@@ -179,20 +186,28 @@ if [ "$ERROR" -eq 0 ]; then
         log "[✓] Reload berhasil, cache tetap dipertahankan"
 
     else
-        log "[!] reload_keep_cache tidak tersedia atau gagal, mencoba reload biasa..."
+
+        log "[!] reload_keep_cache gagal, mencoba reload biasa"
 
         if systemctl reload unbound; then
-            log "[?] Reload berhasil, restore cache..."
-            unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+            log "[✓] Reload berhasil"
 
         else
-            log "[!] Reload gagal, restart Unbound..."
+            log "[!] Reload gagal, restart Unbound"
             systemctl restart unbound
-            log "[?] Restart berhasil, restore cache..."
-            unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
         fi
+
+        log "[?] Restore cache..."
+        unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
+
     fi
 
+elif [ "$ERROR" -eq 0 ]; then
+
+    log "[✓] Tidak ada perubahan blocklist, Unbound tidak direload"
+
 else
-    log "[!] Ditemukan error pada config, UNBOUND TIDAK DIRELOAD/RESTART!"
+
+    log "[!] Ditemukan error pada config, Unbound tidak direload"
+
 fi
