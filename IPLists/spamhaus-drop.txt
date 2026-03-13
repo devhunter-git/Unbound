@@ -1,6 +1,6 @@
 # Spamhaus DROP IPv4 Blocklist
 # Source: https://www.spamhaus.org/drop/drop.txt
-# Updated: 13/03/2026 22:25:42,95
+# Updated: 14/03/2026  1:30:53,20
 1.10.16.0/20 ; SBL256894
 1.19.0.0/16 ; SBL434604
 1.32.128.0/18 ; SBL286275
