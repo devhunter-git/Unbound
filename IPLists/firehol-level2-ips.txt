@@ -1,6 +1,6 @@
 # FireHOL Level2 IP Blocklist
 # Source: https://iplists.firehol.org/files/firehol_level2.netset
-# Updated: 22/03/2026  1:30:18,81
+# Updated: 22/03/2026  1:46:25,70
 
 1.12.48.131
 1.12.55.42
