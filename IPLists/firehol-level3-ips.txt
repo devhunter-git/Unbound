@@ -1,6 +1,6 @@
 # FireHOL Level3 IP Blocklist
 # Source: https://iplists.firehol.org/files/firehol_level3.netset
-# Updated: 22/03/2026  1:30:27,45
+# Updated: 22/03/2026  1:46:34,44
 
 1.2.180.223
 1.14.3.240
