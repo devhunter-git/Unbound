@@ -1,6 +1,6 @@
 # Indonesia IPv6 CIDR List
 # Source: herrbischoff/country-ip-blocks
-# Updated: 23/03/2026 21:30:23,75
+# Updated: 24/03/2026  1:53:58,16
 # Total CIDR: 2583
 2001:7fa:2::/48
 2001:7fa:f::/48
