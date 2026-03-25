@@ -5,7 +5,7 @@ BASE_DIR="/etc/unbound/unbound.conf.d"
 CACHE_FILE="/var/lib/unbound/cache.dump"
 
 ERROR=0
-CHANGED=0
+CHANGED=1  # selalu dianggap berubah (always fresh)
 
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
@@ -14,7 +14,7 @@ log() {
 # ===============================
 # PREREQUISITE CHECK
 # ===============================
-for cmd in wget curl unbound-control unbound-checkconf systemctl cmp; do
+for cmd in wget curl unbound-control unbound-checkconf systemctl; do
     command -v "$cmd" >/dev/null 2>&1 || {
         log "[!] Command tidak ditemukan: $cmd"
         exit 1
@@ -28,15 +28,21 @@ log "[?] Backup DNS cache..."
 unbound-control dump_cache > "$CACHE_FILE" 2>/dev/null || true
 
 # ===============================
-# FOLDER KATEGORI
+# RESET FOLDER
 # ===============================
-mkdir -p "$BASE_DIR/malware"
-mkdir -p "$BASE_DIR/00-safesearch"
-mkdir -p "$BASE_DIR/zzz-whitelist"
-mkdir -p "$BASE_DIR/zzz-block-lokal"
+log "[?] Reset folder blocklist..."
+rm -rf "$BASE_DIR/malware" \
+       "$BASE_DIR/00-safesearch" \
+       "$BASE_DIR/zzz-whitelist" \
+       "$BASE_DIR/zzz-block-lokal"
+
+mkdir -p "$BASE_DIR/malware" \
+         "$BASE_DIR/00-safesearch" \
+         "$BASE_DIR/zzz-whitelist" \
+         "$BASE_DIR/zzz-block-lokal"
 
 # ===============================
-# BLOCKLISTS
+# LIST
 # ===============================
 declare -A LISTS
 
@@ -48,7 +54,7 @@ LISTS["00-safesearch/00-DevHunter-SAFESEARCH.conf"]="https://raw.githubuserconte
 
 # OISD
 LISTS["malware/01-DevHunter-OISD-Big.conf"]="https://big.oisd.nl/unbound"
-LISTS["malware/01-DevHunter-OISD-nsfw.conf"]="https://nsfw.oisd.nl/unbound"
+LISTS["malware/01-DevHunter-OISD-nsfw-small.conf"]="https://nsfw-small.oisd.nl/unbound"
 
 # 1Hosts
 LISTS["malware/01-DevHunter-1Hosts-Lite.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/1hosts-lite.conf"
@@ -93,6 +99,19 @@ LISTS["malware/01-DevHunter-malwareworld-phishing.conf"]="https://raw.githubuser
 LISTS["malware/01-DevHunter-malwareworld-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-malware.conf"
 LISTS["malware/01-DevHunter-malwareworld-DGA.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-dga.conf"
 
+# spydisec
+LISTS["malware/01-DevHunter-spydisec-malicious-part1.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part1.conf"
+LISTS["malware/01-DevHunter-spydisec-malicious-part2.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part2.conf"
+LISTS["malware/01-DevHunter-spydisec-malicious-part3.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part3.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part4.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part4.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part5.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part5.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part6.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part6.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part7.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part7.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part8.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part8.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part9.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part9.conf"
+#LISTS["malware/01-DevHunter-spydisec-malicious-part10.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part10.conf"
+LISTS["malware/01-DevHunter-spydisec-malicious-part11.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part11.conf"
+
 # stalkerware
 LISTS["malware/01-DevHunter-stalkerware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware.conf"
 LISTS["malware/01-DevHunter-stalkerware-quad9.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware-quad9.conf"
@@ -113,10 +132,22 @@ LISTS["malware/01-DevHunter-useless-websites-sefinek.conf"]="https://blocklist.s
 LISTS["malware/01-DevHunter-blocklistproject-redirect.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/redirect/blocklistproject/redirect.fork.conf"
 LISTS["malware/01-DevHunter-blocklistproject-ransomware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/ransomware/blocklistproject/ransomware.fork.conf"
 LISTS["malware/01-DevHunter-blocklistproject-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/blocklistproject/malware.fork.conf"
+LISTS["malware/01-DevHunter-blocklistproject-abuse.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/abuse/blocklistproject/hosts.fork.conf"
+
+# Big Dragon
+LISTS["malware/01-DevHunter-bigdargon-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/bigdargon/hostsVN.fork.conf"
+
+# DandelionSprout
+LISTS["malware/01-DevHunter-DandelionSprout-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/DandelionSprout-AntiMalwareHosts.fork.conf"
+
+# URLhaus
+LISTS["malware/01-DevHunter-URLhaus-malware.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/malicious/malware-filter/urlhaus-filter-hosts-online.fork.conf"
+LISTS["malware/01-DevHunter-URLhaus-abuse.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/abuse/urlhaus.abuse.ch/hostfile.fork.conf"
 
 # Accomplist
 LISTS["malware/01-DevHunter-Accomplist-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/Accomplist%20Gambling%20Unbound.conf"
 LISTS["malware/01-DevHunter-Accomplist-Malicious-Dom.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/Accomplist%20Malicious-Dom%20Top-N%20Unbound.conf"
+LISTS["malware/01-DevHunter-Accomplist-Family-Safe.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/Accomplist%20Family-Safe%20Top-N%20Unbound.conf"
 
 # Trustpositif Alsyundawy
 LISTS["malware/01-DevHunter-Alsyundawy-TrustPositif-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/Alsyundawy%20TrustPositif%20Gambling%20Indonesia.conf"
@@ -133,14 +164,27 @@ LISTS["malware/01-DevHunter-StevenBlack.conf"]="https://blocklist.sefinek.net/ge
 LISTS["zzz-whitelist/zzzz-devhunter-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/devhunter-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-shadowwhisperer-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/shadowwhisperer-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-referral-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-amazon-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-amazon-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-apple-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-apple-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-huawei-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-huawei-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-lg-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-lgwebos-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-oppo-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-oppo-realme-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-roku-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-roku-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-samsung-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-samsung-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-smart-tv-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-smart-tv-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-ext-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-extended-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-vivo-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-vivo-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-win-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-winoffice-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-xiaomi-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-xiaomi-whitelist.conf"
 
 # ===============================
-# DOWNLOAD & VALIDASI
+# DOWNLOAD
 # ===============================
 for path in "${!LISTS[@]}"; do
 
     url="${LISTS[$path]}"
-    tmp="/tmp/$(basename "$path")"
+    tmp="/tmp/unbound-$$-$(basename "$path")"
     dest="$BASE_DIR/$path"
 
     log "[+] Download $path"
@@ -157,15 +201,8 @@ for path in "${!LISTS[@]}"; do
         continue
     }
 
-    if [ -f "$dest" ] && cmp -s "$tmp" "$dest"; then
-        log "[-] Tidak ada perubahan: $path"
-        rm "$tmp"
-        continue
-    fi
-
-    log "[✓] File berubah: $path"
     mv "$tmp" "$dest"
-    CHANGED=1
+    log "[✓] Update: $path"
 
     if ! unbound-checkconf "$dest" >/dev/null 2>&1; then
         log "[!] Syntax error: $dest"
@@ -175,39 +212,29 @@ for path in "${!LISTS[@]}"; do
 done
 
 # ===============================
-# RELOAD UNBOUND
+# RELOAD
 # ===============================
+if [ "$ERROR" -eq 0 ]; then
 
-if [ "$ERROR" -eq 0 ] && [ "$CHANGED" -eq 1 ]; then
-
-    log "[?] Reload Unbound (keep cache)..."
+    log "[?] Reload Unbound (always fresh)..."
 
     if unbound-control reload_keep_cache 2>/dev/null; then
-        log "[✓] Reload berhasil, cache tetap dipertahankan"
+        log "[✓] Reload berhasil (cache dipertahankan)"
 
     else
-
-        log "[!] reload_keep_cache gagal, mencoba reload biasa"
+        log "[!] reload_keep_cache gagal, fallback..."
 
         if systemctl reload unbound; then
             log "[✓] Reload berhasil"
-
         else
-            log "[!] Reload gagal, restart Unbound"
+            log "[!] Restart Unbound"
             systemctl restart unbound
         fi
 
         log "[?] Restore cache..."
         unbound-control load_cache < "$CACHE_FILE" 2>/dev/null || true
-
     fi
 
-elif [ "$ERROR" -eq 0 ]; then
-
-    log "[✓] Tidak ada perubahan blocklist, Unbound tidak direload"
-
 else
-
-    log "[!] Ditemukan error pada config, Unbound tidak direload"
-
+    log "[!] Error ditemukan, Unbound tidak direload"
 fi
