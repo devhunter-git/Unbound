@@ -54,7 +54,7 @@ LISTS["00-safesearch/00-DevHunter-SAFESEARCH.conf"]="https://raw.githubuserconte
 
 # OISD
 LISTS["malware/01-DevHunter-OISD-Big.conf"]="https://big.oisd.nl/unbound"
-LISTS["malware/01-DevHunter-OISD-nsfw-small.conf"]="https://nsfw-small.oisd.nl/unbound"
+LISTS["malware/01-DevHunter-OISD-nsfw.conf"]="https://nsfw.oisd.nl/unbound"
 
 # 1Hosts
 LISTS["malware/01-DevHunter-1Hosts-Lite.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/1hosts-lite.conf"
@@ -75,12 +75,15 @@ LISTS["malware/01-DevHunter-hagezi-tif.conf"]="https://raw.githubusercontent.com
 LISTS["malware/01-DevHunter-hagezi-spam-tlds.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-spam-tlds.conf"
 LISTS["malware/01-DevHunter-hagezi-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-gambling.conf"
 LISTS["malware/01-DevHunter-hagezi-nosafesearch.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-nosafesearch.conf"
+LISTS["malware/01-DevHunter-hagezi-hoster.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-hoster.conf"
+LISTS["malware/01-DevHunter-hagezi-tif-ips.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/hagezi-tif-ips.conf"
 
 # shadowwhisperer
 LISTS["malware/01-DevHunter-shadowwhisperer-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-malware.conf"
 LISTS["malware/01-DevHunter-shadowwhisperer-scam.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-scam.conf"
 LISTS["malware/01-DevHunter-shadowwhisperer-typo.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-typo.conf"
 LISTS["malware/01-DevHunter-shadowwhisperer-gambling.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-gambling.conf"
+LISTS["malware/01-DevHunter-shadowwhisperer-malware-hosting.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/shadowwhisperer-malware-hosting-ips.conf"
 
 # romainmarcoux
 LISTS["malware/01-DevHunter-romainmarcoux.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/romainmarcoux-full-aa-ab-ac.conf"
@@ -98,19 +101,14 @@ LISTS["malware/01-DevHunter-phishdestroy.conf"]="https://raw.githubusercontent.c
 LISTS["malware/01-DevHunter-malwareworld-phishing.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-phishing.conf"
 LISTS["malware/01-DevHunter-malwareworld-malware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-malware.conf"
 LISTS["malware/01-DevHunter-malwareworld-DGA.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-dga.conf"
+LISTS["malware/01-DevHunter-malwareworld-spammer.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-spammer.conf"
+LISTS["malware/01-DevHunter-malwareworld-knownattacker.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/malwareworld-knownattacker.conf"
 
 # spydisec
 LISTS["malware/01-DevHunter-spydisec-malicious-part1.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part1.conf"
 LISTS["malware/01-DevHunter-spydisec-malicious-part2.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part2.conf"
 LISTS["malware/01-DevHunter-spydisec-malicious-part3.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part3.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part4.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part4.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part5.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part5.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part6.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part6.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part7.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part7.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part8.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part8.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part9.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part9.conf"
-#LISTS["malware/01-DevHunter-spydisec-malicious-part10.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part10.conf"
-LISTS["malware/01-DevHunter-spydisec-malicious-part11.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part11.conf"
+LISTS["malware/01-DevHunter-spydisec-malicious-part4.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/spydisec-malicious-part4.conf"
 
 # stalkerware
 LISTS["malware/01-DevHunter-stalkerware.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stalkerware.conf"
@@ -155,8 +153,11 @@ LISTS["malware/01-DevHunter-Alsyundawy-TrustPositif-gambling.conf"]="https://raw
 # Trustpositif AU
 LISTS["malware/01-DevHunter-trustpositif-gambling-au.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/trustpositif-gambling-au.conf"
 
+# Trustpositif ID
+LISTS["malware/01-DevHunter-trustpositif-gambling-id.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/trustpositif-gambling-id.conf"
+
 # StevenBlack
-LISTS["malware/01-DevHunter-StevenBlack.conf"]="https://blocklist.sefinek.net/generated/v1/unbound/other/StevenBlack/fakenews-gambling-porn.fork.conf"
+LISTS["malware/01-DevHunter-StevenBlack.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/BlockList_DB/stevenblack-unbound.conf"
 
 # ===============================
 # WHITELIST
@@ -164,16 +165,12 @@ LISTS["malware/01-DevHunter-StevenBlack.conf"]="https://blocklist.sefinek.net/ge
 LISTS["zzz-whitelist/zzzz-devhunter-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/devhunter-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-shadowwhisperer-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/shadowwhisperer-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-referral-whitelist.conf"
-LISTS["zzz-whitelist/zzzz-devhunter-hagezi-amazon-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-amazon-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-apple-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-apple-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-huawei-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-huawei-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-lg-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-lgwebos-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-oppo-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-oppo-realme-whitelist.conf"
-LISTS["zzz-whitelist/zzzz-devhunter-hagezi-roku-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-roku-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-samsung-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-samsung-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-smart-tv-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-smart-tv-whitelist.conf"
-LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-ext-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-extended-whitelist.conf"
-LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-vivo-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-vivo-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-win-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-winoffice-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-xiaomi-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-xiaomi-whitelist.conf"
