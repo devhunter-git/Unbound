@@ -174,6 +174,10 @@ LISTS["zzz-whitelist/zzzz-devhunter-hagezi-smart-tv-whitelist.conf"]="https://ra
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-vivo-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-vivo-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-win-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-winoffice-whitelist.conf"
 LISTS["zzz-whitelist/zzzz-devhunter-hagezi-xiaomi-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-xiaomi-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-amazon-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-amazon-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-roku-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-roku-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-ext-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-extended-whitelist.conf"
+LISTS["zzz-whitelist/zzzz-devhunter-hagezi-tiktok-whitelist.conf"]="https://raw.githubusercontent.com/devhunter-git/Unbound/refs/heads/main/WhiteList%20DB/hagezi-tiktok-whitelist.conf"
 
 # ===============================
 # DOWNLOAD
