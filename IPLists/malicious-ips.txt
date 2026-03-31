@@ -1,6 +1,6 @@
 # Malicious IP Addresses
 # Source: https://raw.githubusercontent.com/sefinek/Malicious-IP-Addresses/refs/heads/main/lists/main.txt
-# Updated: 31/03/2026 21:09:22,11
+# Updated: 31/03/2026 21:59:04,98
 1.0.78.72
 1.0.170.50
 1.0.171.213
