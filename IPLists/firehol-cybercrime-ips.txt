@@ -1,6 +1,6 @@
 # FireHOL Cybercrime IP Blocklist
 # Source: https://iplists.firehol.org/files/cybercrime.ipset
-# Updated: 04/04/2026  0:19:16,47
+# Updated: 04/04/2026 21:32:39,17
 
 1.12.77.136
 1.12.239.227
