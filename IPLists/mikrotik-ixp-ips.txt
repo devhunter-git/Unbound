@@ -1,0 +1,6 @@
+# Mikrotik IXP IP List
+# Source: http://ixp.mikrotik.co.id/download/nice.rsc
+# Updated: 08/04/2026  2:16:06,06
+
+
+# Total IPs: 0
