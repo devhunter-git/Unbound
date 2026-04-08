@@ -1,0 +1,6 @@
+# MikroTik Nice IP List
+# Source: http://ixp.mikrotik.co.id/download/nice.rsc
+# Updated: -- 11:49:40,16
+
+
+# Total IPs: 0
