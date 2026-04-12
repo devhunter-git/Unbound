@@ -1,6 +1,6 @@
 # AS137331 IP Blocklist
 # Source: https://github.com/ipverse/as-ip-blocks/tree/master/as/137331
-# Updated: 30/03/2026 21:47:42,21
+# Updated: 12/04/2026 22:55:40,77
 # AS137331 (IDNIC-CLOUDTEKNOLOGI-AS-ID)
 # PT Cloud Teknologi Nusantara
 #
